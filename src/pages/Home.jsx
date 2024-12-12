@@ -26,7 +26,7 @@ function Home() {
   const { data, isPending, error } = useFetch(
     `https://api.unsplash.com/search/photos?client_id=${
       import.meta.env.VITE_ACCES_KEY
-    }&query=${searchParamsFromAction ?? "cars"}&page=${pageParam}`
+    }&query=${searchParamsFromAction ?? "all"}&page=${pageParam}`
   );
 
   useEffect(() => {
