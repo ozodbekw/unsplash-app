@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .align-elements {
+    @apply max-w-[1400px] mx-auto px-5;
+  }
+  .hover-icons {
+    @apply invisible opacity-0 group-hover:opacity-100 group-hover:visible transition-all duration-300;
+  }
+  .heart-icon {
+    @apply h-7 w-7 border rounded-full flex justify-center items-center cursor-pointer right-2 top-2 hover-icons;
+  }
+
+  html,
+  body,
+  #root {
+    @apply h-full;
+  }
+
+  #root {
+    @apply flex flex-col;
+  }
+
+  main {
+    @apply grow;
+  }
+}
