@@ -78,7 +78,7 @@ function Navbar() {
             <FaSun className="swap-off h-6 w-6 fill-current" />
 
             {/* moon icon */}
-            <FaMoon className="swap-on h-6 w-10 fill-current" />
+            <FaMoon className="swap-on h-6 w-6 fill-current" />
           </label>
         </div>
       </div>

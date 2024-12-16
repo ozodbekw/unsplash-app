@@ -27,7 +27,7 @@ function Image({ image, added }) {
 
   const downloadImage = (event) => {
     event.preventDefault();
-    window.open(links.download + "&force=true", "_blank")
+    window.open(links.download + "&force=true", "_blank");
   };
 
   return (
