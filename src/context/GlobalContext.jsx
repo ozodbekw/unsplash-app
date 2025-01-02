@@ -20,7 +20,7 @@ const changeState = (state, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case "Login":
+    case "LOGIN":
       return {
         ...state,
         user: payload,

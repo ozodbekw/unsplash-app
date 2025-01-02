@@ -5,6 +5,7 @@ import { useRegister } from "../hooks/useRegister";
 import { HiLockClosed } from "react-icons/hi";
 import { FcPicture } from "react-icons/fc";
 import { FcGoogle } from "react-icons/fc";
+import { Link } from "react-router-dom";
 
 function Register() {
   const { registerWithGoogle } = useRegister();
@@ -15,16 +16,16 @@ function Register() {
           <div>
             <FcPicture className="mx-auto h-[200px] w-auto" />
             <h2 className="mt-6 text-3xl font-extrabold text-center text-gray-900">
-              Sign in to your account
+              Register
             </h2>
             <p className="mt-2 text-sm text-center text-gray-600">
               Or{" "}
-              <a
-                href="#"
+              <Link
+                to="/login"
                 className="font-medium text-indigo-600 hover:text-indigo-500"
               >
-                start your 14-day free trial
-              </a>
+                Login
+              </Link>
             </p>
           </div>
           <form className="mt-8 space-y-6" action="#" method="POST">
@@ -111,6 +112,7 @@ function Register() {
           </form>
         </div>
       </div>
+      <div className="fixed top-0 bottom-0 left-0 bg-black bg-opacity-30 md:hidden"></div>
       <div className="">
         <img
           className="object-fill w-full h-screen sm:px-6 lg:px-8"

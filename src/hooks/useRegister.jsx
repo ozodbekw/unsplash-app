@@ -17,7 +17,8 @@ export const useRegister = () => {
       .then((result) => {
         // The signed-in user info.
         const user = result.user;
-        dispatch({type:"LOGIN",payload:user});
+        console.log(result);
+        dispatch({ type: "LOGIN", payload: user });
         toast.success("Welcome");
       })
       .catch((error) => {
@@ -26,5 +27,7 @@ export const useRegister = () => {
         toast.error(errorMessage);
       });
   };
-  return registerWithGoogle;
+  return { registerWithGoogle };
 };
+
+//  21:10 minut
