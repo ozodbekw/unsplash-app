@@ -21,9 +21,10 @@ import { action as HomeAction } from "./pages/Home";
 
 // components
 import { ProtectedRoutes } from "./components";
+import { useGlobalContext } from "./hooks/useGlobalContext";
 
 function App() {
-  const user = true;
+  const {user} = useGlobalContext();
   const routes = createBrowserRouter([
     {
       path: "/",
