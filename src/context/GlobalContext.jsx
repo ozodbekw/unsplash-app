@@ -25,6 +25,11 @@ const changeState = (state, action) => {
         ...state,
         user: payload,
       };
+    case "AUTH_READY":
+      return {
+        ...state,
+        authReady: true,
+      };
     case "LIKE":
       if (!state.likedImages.some((image) => image.id === payload.id)) {
         return {
@@ -46,6 +51,7 @@ const changeState = (state, action) => {
 export function GlobalContextProvider({ children }) {
   const [state, dispatch] = useReducer(changeState, {
     user: null,
+    authReady: false,
     likedImages: [],
     downloadImages: [],
   });
