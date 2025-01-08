@@ -22,6 +22,7 @@ import MainLayout from "./layouts/MainLayout";
 
 // actions
 import { action as HomeAction } from "./pages/Home";
+import { action as RegisterAction } from "./pages/Register";
 
 // components
 import { ProtectedRoutes } from "./components";
@@ -80,16 +81,13 @@ function App() {
     {
       path: "/register",
       element: user ? <Navigate to="/" /> : <Register />,
+      action: RegisterAction,
     },
   ]);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      if (user) {
-        dispatch({ type: "LOGIN", payload: user });
-      } else {
-        toast.warn("User already sign out");
-      }
+      dispatch({ type: "LOGIN", payload: user });
       dispatch({ type: "AUTH_READY" });
     });
   }, []);
