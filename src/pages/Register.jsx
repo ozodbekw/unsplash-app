@@ -5,9 +5,33 @@ import { useRegister } from "../hooks/useRegister";
 import { HiLockClosed } from "react-icons/hi";
 import { FcPicture } from "react-icons/fc";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+
+// router-dom
+import { Link, useActionData } from "react-router-dom";
+
+// action
+export const action = async ({ request }) => {
+  const form = await request.formData();
+  const displayName = form.get("displayName");
+  const email = form.get("email");
+  const password = form.get("password");
+  const confirmPassword = form.get("confirmPassword");
+
+  if (password == confirmPassword) {
+    return {
+      displayName,
+      email,
+      password,
+      confirmPassword,
+    };
+  }else{
+    toast.warn("Password does not equal!")
+    return null;
+  }
+};
 
 function Register() {
+  const formData = useActionData();
   const { registerWithGoogle } = useRegister();
   return (
     <div className="flex items-center ">
@@ -45,7 +69,7 @@ function Register() {
                   placeholder="Email address"
                 />
               </div>
-              <div>
+              <div className="mb-5">
                 <label htmlFor="password" className="sr-only">
                   Password
                 </label>
@@ -57,6 +81,20 @@ function Register() {
                   required
                   className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Password"
+                />
+              </div>
+              <div>
+                <label htmlFor="confirm_password" className="sr-only">
+                  Confirm Password
+                </label>
+                <input
+                  id="confirm_password"
+                  name="confirm_password"
+                  type="password"
+                  autoComplete="current-password"
+                  required
+                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  placeholder="Confirm Password"
                 />
               </div>
             </div>
