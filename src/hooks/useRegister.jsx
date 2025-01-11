@@ -27,7 +27,10 @@ export const useRegister = () => {
         toast.error(errorMessage);
       });
   };
-  return { registerWithGoogle };
-};
 
-//  21:10 minut
+  const registerWithEmail = (email, password, displayName) => {
+    
+  };
+
+  return { registerWithEmail, registerWithGoogle };
+};

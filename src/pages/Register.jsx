@@ -7,7 +7,8 @@ import { FcPicture } from "react-icons/fc";
 import { FcGoogle } from "react-icons/fc";
 
 // router-dom
-import { Link, useActionData } from "react-router-dom";
+import { Link, useActionData, Form } from "react-router-dom";
+import { useEffect } from "react";
 
 // action
 export const action = async ({ request }) => {
@@ -22,17 +23,26 @@ export const action = async ({ request }) => {
       displayName,
       email,
       password,
-      confirmPassword,
     };
-  }else{
-    toast.warn("Password does not equal!")
+  } else {
+    toast.warn("Password does not equal!");
     return null;
   }
 };
 
 function Register() {
   const formData = useActionData();
-  const { registerWithGoogle } = useRegister();
+  const { registerWithGoogle, registerWithEmail } = useRegister();
+  useEffect(() => {
+    if (inputData) {
+      registerWithEmail(
+        inputData.displayName,
+        inputData.email,
+        inputData.password
+      );
+    }
+  }, [inputData]);
+
   return (
     <div className="flex items-center ">
       <div className="flex items-center w-[50vw] justify-center min-h-full px-4 py-12 sm:px-6 lg:px-8">
@@ -52,7 +62,7 @@ function Register() {
               </Link>
             </p>
           </div>
-          <form className="mt-8 space-y-6" action="#" method="POST">
+          <Form className="mt-8 space-y-6" action="#" method="POST">
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="-space-y-px rounded-md shadow-sm">
               <div className="mb-5">
@@ -147,7 +157,7 @@ function Register() {
                 <FcGoogle className="w-5 h-5" />
               </button>
             </div>
-          </form>
+          </Form>
         </div>
       </div>
       <div className="fixed top-0 bottom-0 left-0 bg-black bg-opacity-30 md:hidden"></div>
