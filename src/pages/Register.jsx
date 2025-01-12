@@ -9,6 +9,7 @@ import { FcGoogle } from "react-icons/fc";
 // router-dom
 import { Link, useActionData, Form } from "react-router-dom";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 // action
 export const action = async ({ request }) => {
@@ -31,7 +32,7 @@ export const action = async ({ request }) => {
 };
 
 function Register() {
-  const formData = useActionData();
+  const inputData = useActionData();
   const { registerWithGoogle, registerWithEmail } = useRegister();
   useEffect(() => {
     if (inputData) {
@@ -62,10 +63,10 @@ function Register() {
               </Link>
             </p>
           </div>
-          <Form className="mt-8 space-y-6" action="#" method="POST">
+          <Form className="mt-8 space-y-6 " action="#" method="POST">
             <input type="hidden" name="remember" defaultValue="true" />
-            <div className="-space-y-px rounded-md shadow-sm">
-              <div className="mb-5">
+            <div className="flex flex-col gap-4 -space-y-px rounded-md shadow-sm">
+              <div className="">
                 <label htmlFor="email-address" className="sr-only">
                   Email address
                 </label>
@@ -77,6 +78,20 @@ function Register() {
                   required
                   className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Email address"
+                />
+              </div>
+              <div className="mb-5">
+                <label htmlFor="displayName" className="sr-only">
+                  Name
+                </label>
+                <input
+                  id="displayName"
+                  name="displayName"
+                  type="text"
+                  autoComplete="name"
+                  required
+                  className="relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                  placeholder="Your name"
                 />
               </div>
               <div className="mb-5">
@@ -94,12 +109,12 @@ function Register() {
                 />
               </div>
               <div>
-                <label htmlFor="confirm_password" className="sr-only">
+                <label htmlFor="confirmPassword" className="sr-only">
                   Confirm Password
                 </label>
                 <input
-                  id="confirm_password"
-                  name="confirm_password"
+                  id="confirmPassword"
+                  name="confirmPassword"
                   type="password"
                   autoComplete="current-password"
                   required

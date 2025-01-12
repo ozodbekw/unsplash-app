@@ -1,13 +1,41 @@
+// reacti-cons
 import { HiLockClosed } from "react-icons/hi";
 import { FcPicture } from "react-icons/fc";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+
+// react-rounter-dom
+import { Form, Link, useActionData } from "react-router-dom";
 
 // custom hooks
 import { useRegister } from "../hooks/useRegister";
+import { useLogin } from "../hooks/useLogin";
+
+// react hooks
+import { useEffect } from "react";
+
+// action
+export const action = async ({ request }) => {
+  const form = await request.formData();
+  const email = form.get("email");
+  const password = form.get("password");
+
+  return {
+    email,
+    password,
+  };
+};
 
 function Login() {
+  const inputData = useActionData();
+
+  useEffect(() => {
+    if (inputData) {
+      loginWithEmail(inputData.email, inputData.password);
+    }
+  }, [inputData]);
+
   const { registerWithGoogle } = useRegister();
+  const { loginWithEmail } = useLogin();
   return (
     <div className="flex items-center ">
       <div className="flex items-center w-[50vw] justify-center min-h-full px-4 py-12 sm:px-6 lg:px-8">
@@ -27,7 +55,7 @@ function Login() {
               </Link>
             </p>
           </div>
-          <form className="mt-8 space-y-6" action="#" method="POST">
+          <Form className="mt-8 space-y-6" action="#" method="POST">
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="-space-y-px rounded-md shadow-sm">
               <div className="mb-5">
@@ -108,7 +136,7 @@ function Login() {
                 <FcGoogle className="w-5 h-5" />
               </button>
             </div>
-          </form>
+          </Form>
         </div>
       </div>
       <div className="">
