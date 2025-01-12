@@ -96,7 +96,7 @@ function Navbar() {
             <FaMoon className="w-6 h-6 fill-current swap-on" />
           </label>
           <div className="flex items-center gap-3">
-            <p>{user.displayName.split(" ")[0]}</p>
+            <p>{user.displayName && user.displayName.split(" ")[0]}</p>
             <div className=" dropdown dropdown-end">
               <div
                 tabIndex={0}
@@ -104,7 +104,12 @@ function Navbar() {
                 className="btn btn-ghost btn-circle avatar"
               >
                 <div className="w-10 rounded-full">
-                  <img src={user.photoURL} alt={user.displayName + "avatar"} />
+                  {user.photoURL && (
+                    <img
+                      src={user.photoURL}
+                      alt={user.displayName + "avatar"}
+                    />
+                  )}
                 </div>
               </div>
               <ul
