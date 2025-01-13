@@ -1,8 +1,7 @@
-
+import { useCollection } from "../hooks/useCollection";
 function About() {
-  return (
-    <div>About</div>
-  )
+  useCollection("images")
+  return <div>About</div>;
 }
 
-export default About
+export default About;
