@@ -1,13 +1,13 @@
 // import firebase
-import { doc, setDoc, deleteDoc } from "firebase/firestore";
+import { doc, deleteDoc, addDoc, collection } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig";
 
 // toaster
 import { toast } from "react-toastify";
 
 export const useFirestore = () => {
-  const addDocument = (collectionName, id, data) => {
-    setDoc(doc(db, collectionName, id), data)
+  const addDocument = (collectionName, data) => {
+    addDoc(collection(db, collectionName), data)
       .then(() => {
         toast.success("You liked this image ❤️");
       })
