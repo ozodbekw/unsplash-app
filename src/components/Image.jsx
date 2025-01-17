@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 import { useFirestore } from "../hooks/useFirestore";
 
 function Image({ image, added }) {
-  const { likedImages, dispatch } = useGlobalContext();
+  const { likedImages, user: authUser } = useGlobalContext();
 
   const { addDocument, deleteDocument } = useFirestore();
 
@@ -19,14 +19,14 @@ function Image({ image, added }) {
 
   const addLikedImage = (image, event) => {
     event.preventDefault();
-    const alreadyAdded = likedImages.some((img) => {
+    const alreadyAdded = likedImages.find((img) => {
       return img.id == image.id;
     });
 
     if (!alreadyAdded) {
-      addDocument("likedImages", image.id, image);
+      addDocument("likedImages", { ...image, uid: authUser.uid });
     } else {
-      deleteDocument("likedImages", image.id, image);
+      deleteDocument("likedImages", alreadyAdded._id);
     }
   };
 
