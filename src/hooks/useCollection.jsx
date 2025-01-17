@@ -19,11 +19,3 @@ export const useCollection = (collectionName) => {
 
   return { data };
 };
-// const getData = async () => {
-//   const querySnapshot = await getDocs(collection(db, collectionName));
-//   querySnapshot.forEach((doc) => {
-//     queryData.push({ id: doc.id, ...doc.data() });
-//   });
-//   setData(queryData);
-// };
-// getData();

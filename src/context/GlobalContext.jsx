@@ -1,20 +1,7 @@
 import { createContext, useEffect, useReducer } from "react";
+import { useCollection } from "../hooks/useCollection";
 
 export const GlobalContext = createContext();
-
-// const dataFromLocalStorage = () => {
-//   try {
-//     return (
-//       JSON.parse(localStorage.getItem("my-splash-data")) || {
-//         likedImages: [],
-//         downloadImages: [],
-//       }
-//     );
-//   } catch (error) {
-//     console.error("Error parsing localStorage data:", error);
-//     return { likedImages: [] };
-//   }
-// };
 
 const changeState = (state, action) => {
   const { type, payload } = action;
@@ -30,25 +17,22 @@ const changeState = (state, action) => {
         ...state,
         authReady: true,
       };
-    case "LIKE":
+    case "ADD_LIKEDIMAGES":
       if (!state.likedImages.some((image) => image.id === payload.id)) {
         return {
           ...state,
-          likedImages: [...state.likedImages, payload],
+          likedImages: payload,
         };
       }
       return state;
-    case "UNLIKE":
-      return {
-        ...state,
-        likedImages: state.likedImages.filter((image) => image.id !== payload),
-      };
     default:
       return state;
   }
 };
 
 export function GlobalContextProvider({ children }) {
+  const { data: likedImages } = useCollection("likedImages");
+
   const [state, dispatch] = useReducer(changeState, {
     user: null,
     authReady: false,
@@ -59,6 +43,13 @@ export function GlobalContextProvider({ children }) {
   useEffect(() => {
     localStorage.setItem("my-splash-data", JSON.stringify(state));
   }, [state]);
+
+  useEffect(() => {
+    if (likedImages)
+      dispatch({ type: "ADD_LIKEDIMAGES", payload: likedImages });
+
+    return;
+  }, [likedImages]);
 
   return (
     <GlobalContext.Provider value={{ ...state, dispatch }}>
