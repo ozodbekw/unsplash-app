@@ -7,8 +7,13 @@ import { FaHeart, FaRegHeart, FaDownload } from "react-icons/fa";
 // react router dom
 import { Link } from "react-router-dom";
 
+// useFirestore hook
+import { useFirestore } from "../hooks/useFirestore";
+
 function Image({ image, added }) {
   const { likedImages, dispatch } = useGlobalContext();
+
+  const { addDocument, deleteDocument } = useFirestore();
 
   const { links, urls, alt_describtion, user } = image;
 
@@ -19,9 +24,9 @@ function Image({ image, added }) {
     });
 
     if (!alreadyAdded) {
-      dispatch({ type: "LIKE", payload: image });
+      addDocument("likedImages", image.id, image);
     } else {
-      dispatch({ type: "UNLIKE", payload: image.id });
+      deleteDocument("likedImages", image.id, image);
     }
   };
 
@@ -44,7 +49,7 @@ function Image({ image, added }) {
         {added && (
           <span
             onClick={(event) => addLikedImage(image, event)}
-            className="absolute heart-icon bg-white"
+            className="absolute bg-white heart-icon"
           >
             <FaHeart className="text-red-600" />
           </span>
@@ -54,15 +59,15 @@ function Image({ image, added }) {
           alt={alt_describtion}
           className="w-full rounded-md"
         />
-        <span className="absolute left-2 bottom-2 flex gap-2 items-center hover-icons">
+        <span className="absolute flex items-center gap-2 left-2 bottom-2 hover-icons">
           <img
             src={user.profile_image.large}
             alt={user.name + " avatar"}
-            className="w-5 md:w-8 h-5 md:h-8 rounded-full"
+            className="w-5 h-5 rounded-full md:w-8 md:h-8"
           />
-          <p className="text-white text-xs md:text-sm">{user.name}</p>
+          <p className="text-xs text-white md:text-sm">{user.name}</p>
         </span>
-        <span className="absolute h-7 w-7 rounded-full flex justify-center items-center cursor-pointer right-2 bottom-2 hover-icons text-white">
+        <span className="absolute flex items-center justify-center text-white rounded-full cursor-pointer h-7 w-7 right-2 bottom-2 hover-icons">
           <span onClick={downloadImage}>
             <FaDownload className="text-white" />
           </span>
