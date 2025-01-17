@@ -24,7 +24,7 @@ function Image({ image, added }) {
     });
 
     if (!alreadyAdded) {
-      addDocument("likedImages", image);
+      addDocument("likedImages", { ...image, uid: authUser.uid });
     } else {
       deleteDocument("likedImages", alreadyAdded._id);
     }
