@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 
 // useFirestore hook
 import { useFirestore } from "../hooks/useFirestore";
+import { toast } from "react-toastify";
 
 function Image({ image, added }) {
   const { likedImages, user: authUser } = useGlobalContext();
@@ -19,6 +20,11 @@ function Image({ image, added }) {
 
   const addLikedImage = (image, event) => {
     event.preventDefault();
+
+    if (!authUser.emailVerified) {
+      return toast.info("Please verify your email, Go to Profile page");
+    }
+
     const alreadyAdded = likedImages.find((img) => {
       return img.id == image.id;
     });
@@ -31,6 +37,9 @@ function Image({ image, added }) {
   };
 
   const downloadImage = (event) => {
+    if (!authUser.emailVerified) {
+      return toast.info("Please verify your email, Go to Profile page");
+    }
     event.preventDefault();
     window.open(links.download + "&force=true", "_blank");
   };
@@ -68,7 +77,7 @@ function Image({ image, added }) {
           <p className="text-xs text-white md:text-sm">{user.name}</p>
         </span>
         <span className="absolute flex items-center justify-center text-white rounded-full cursor-pointer h-7 w-7 right-2 bottom-2 hover-icons">
-          <span onClick={downloadImage}>
+          <span onClick={(e) => downloadImage(e)}>
             <FaDownload className="text-white" />
           </span>
         </span>

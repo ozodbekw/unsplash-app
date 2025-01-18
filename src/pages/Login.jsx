@@ -48,11 +48,11 @@ function Login() {
     <>
       <Modal />
       <div className="flex items-center ">
-        <div className="flex items-center w-[50vw] justify-center min-h-full px-4 py-12 sm:px-6 lg:px-8">
+        <div className="flex items-center w-[50vw] justify-center min-h-full px-4 py-12 sm:px-6 lg:px-8 z-10 mx-auto">
           <div className="w-full max-w-md space-y-8">
             <div>
-              <FcPicture className="mx-auto h-[200px] w-auto" />
-              <h2 className="mt-6 text-3xl font-extrabold text-center text-gray-900">
+              <FcPicture className="mx-auto h-[200px] w-auto " />
+              <h2 className="mt-6 text-3xl font-extrabold text-center dark:text-gray-900">
                 Login
               </h2>
               <p className="mt-2 text-sm text-center text-gray-600">
@@ -133,7 +133,7 @@ function Login() {
                 >
                   <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                     <HiLockClosed
-                      className="w-5 h-5 text-[#F7CA45] group-hover:text-indigo-400"
+                      className="w-5 h-5 text-[#F7CA45] group-hover:text-indigo-400 hidden md:block"
                       aria-hidden="true"
                     />
                   </span>
@@ -151,7 +151,7 @@ function Login() {
             </Form>
           </div>
         </div>
-        <div className="">
+        <div className="relative hidden md:block ">
           <img
             className="object-fill w-full h-screen sm:px-6 lg:px-8"
             src="https://www.quadrifoglio.com/wp-content/uploads/2022/04/Reception-Glass-per-hospitality-hotel-bar-campus-negozi-aereoporti-e-collitivita-10.jpg"
