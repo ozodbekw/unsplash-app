@@ -5,3 +5,4 @@ export { default as Search } from "./Search";
 export { default as ImagesContainer } from "./ImagesContainer";
 export { default as Image } from "./Image";
 export { default as ProtectedRoutes } from "./ProtectedRoutes";
+export { default as Modal } from "./Modal";

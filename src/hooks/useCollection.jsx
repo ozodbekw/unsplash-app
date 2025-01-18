@@ -28,5 +28,3 @@ export const useCollection = (collectionName, whereData) => {
 
   return { data };
 };
-
-// ---------------------------8:36---------------------------
