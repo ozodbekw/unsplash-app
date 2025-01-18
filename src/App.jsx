@@ -15,6 +15,7 @@ import {
   ImageInfo,
   Login,
   Register,
+  Profile,
 } from "./pages";
 
 // Layouts
@@ -72,6 +73,10 @@ function App() {
         {
           path: "/imageInfo",
           element: <ImageInfo />,
+        },
+        {
+          path: "/profile",
+          element: <Profile />,
         },
       ],
     },
